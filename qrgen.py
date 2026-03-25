@@ -21,7 +21,10 @@ class QRCodeGen(Gtk.Application):
         super().__init__(**kwargs)
         self.connect('activate', self.on_activate)
         self.builder = Gtk.Builder()
-        self.builder.add_from_file("qrcode.ui")
+        self.cwd = os.getcwd()
+        self.appdir = self.cwd+"/.local/share/QRGen/"
+        self.uifile = self.appdir+"qrcode.ui"
+        self.builder.add_from_file(self.uifile)
 
     def on_activate(self, app):
 
@@ -41,7 +44,7 @@ class QRCodeGen(Gtk.Application):
         self.error_correction_combo = self.builder.get_object("err_correction_combo")
 
         self.qr = self.builder.get_object("qrcode_display")
-        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size("default.png", 300, 300)
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size(self.appdir+"default.png", 300, 300)
 
         self.qr.set_from_pixbuf(self.image)
 
@@ -67,7 +70,7 @@ class QRCodeGen(Gtk.Application):
 
     def generate_qr_code(self, data, box_size=300, border=2, error_correction="M"):
         """Generates a QR code image from the given data and saves it as a PNG file."""
-        filename="qrcode.png"
+        filename=self.appdir+"qrcode.png"
 
         match error_correction:
             case "L":
@@ -103,7 +106,7 @@ class QRCodeGen(Gtk.Application):
         print(self.box_size_entry.get_text())
 
         self.generate_qr_code(data, box_size, border, val[0])
-        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size("qrcode.png", 300, 300)
+        self.image = GdkPixbuf.Pixbuf.new_from_file_at_size(self.appdir+"qrcode.png", 300, 300)
         self.qr.set_from_pixbuf(self.image)
 
     def on_clear_clicked(self, widget):

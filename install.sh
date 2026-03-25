@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if zenity --question --text="Install QRGen?"; then
+
+
+APPDIR=$HOME/.local/share/QRGen
+
+(
+	echo "10"
+	echo "#Checking for previous versions"
+	sleep 2
+	if [ -d "$APPDIR" ]; then
+	echo "20"
+	echo "#removing older version files"
+	    rm -rf $APPDIR
+	    rm $HOME/.local/share/applications/QRGen.desktop
+	fi
+	  sleep 2
+	 echo "50"
+	 echo "#Installing QRGen"
+	mkdir $APPDIR
+	cp qrgen.py $APPDIR
+	cp qrcode.ui $APPDIR
+    cp default.png $APPDIR
+
+	cp QRGen.desktop $HOME/.local/share/applications/
+	  sleep 2
+	 echo "100"
+	 echo "# Done!"
+) | zenity --progress \
+  --title="Installing QRGen" \
+  --text="installing..." \
+  --percentage=0 \
+  --auto-close
+  
+ 
+
+else
+    exit 1
+fi
