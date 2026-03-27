@@ -21,7 +21,7 @@ class QRCodeGen(Gtk.Application):
         super().__init__(**kwargs)
         self.connect('activate', self.on_activate)
         self.builder = Gtk.Builder()
-        self.cwd = os.getcwd()
+        self.cwd = os.getenv('HOME')
         self.appdir = self.cwd+"/.local/share/QRGen/"
         self.uifile = self.appdir+"qrcode.ui"
         self.builder.add_from_file(self.uifile)
@@ -42,6 +42,17 @@ class QRCodeGen(Gtk.Application):
         self.box_size_entry = self.builder.get_object("size_txt")
         self.border_entry = self.builder.get_object("border_txt")
         self.error_correction_combo = self.builder.get_object("err_correction_combo")
+
+        self.fill_color = self.builder.get_object("fill_color_button")
+        self.fill_color_dlg = Gtk.ColorDialog()
+        self.fill_color.set_dialog(self.fill_color_dlg)
+        self.fill_color.connect("notify", self.on_fill_color_select)
+
+        self.back_color = self.builder.get_object("back_color_button")
+        self.back_color_dlg = Gtk.ColorDialog()
+        #self.back_color.set_dialog(self.back_color_dlg)
+        self.back_color.connect("notify", self.on_back_color_select)
+  
 
         self.qr = self.builder.get_object("qrcode_display")
         self.image = GdkPixbuf.Pixbuf.new_from_file_at_size(self.appdir+"default.png", 300, 300)
@@ -68,7 +79,7 @@ class QRCodeGen(Gtk.Application):
         app.add_window(window)
         window.present()
 
-    def generate_qr_code(self, data, box_size=300, border=2, error_correction="M"):
+    def generate_qr_code(self, data, box_size=10, border=2, error_correction="M"):
         """Generates a QR code image from the given data and saves it as a PNG file."""
         filename=self.appdir+"qrcode.png"
 
@@ -91,14 +102,20 @@ class QRCodeGen(Gtk.Application):
         qr.add_data(data)
         qr.make(fit=True)
 
+        #fill color
+        fill_color_rgba = self.fill_color.get_rgba()
+        fill_color_val = (int(fill_color_rgba.red * 255),int(fill_color_rgba.green * 255),int(fill_color_rgba.blue * 255))
+        #back color
+        back_color_rgba = self.back_color.get_rgba()
+        back_color_val = (int(back_color_rgba.red * 255),int(back_color_rgba.green * 255),int(back_color_rgba.blue * 255))
+
         #update to have fill colors combo or color picker
-        img = qr.make_image(fill_color="black", back_color="white")
+        img = qr.make_image(fill_color=fill_color_val, back_color=back_color_val)
         img.save(filename)
-        print(f"QR code generated and saved as {filename}")
 
     def on_generate_clicked(self, widget):
         data = self.data_entry.get_text()
-        box_size = int(self.box_size_entry.get_text()) or 300
+        box_size = int(self.box_size_entry.get_text()) or 10
         border = int(self.border_entry.get_text()) or 2
         error_correction_val = self.error_correction_combo.get_active()
         mod = self.error_correction_combo.get_model()
@@ -111,8 +128,8 @@ class QRCodeGen(Gtk.Application):
 
     def on_clear_clicked(self, widget):
         self.data_entry.set_text("")
-        self.box_size_entry.set_text("300")
-        self.border_entry.set_text("4")
+        self.box_size_entry.set_text("10")
+        self.border_entry.set_text("2")
         self.error_correction_combo.set_active(0)  # Reset to default
 
     def on_image_clicked(self, widget):
@@ -145,8 +162,17 @@ class QRCodeGen(Gtk.Application):
                 pass
         except Exception as e:
             print(e)
-       
-  
+
+    def on_fill_color_select(self, color_btn, param):
+        pass
+        #color = color_btn.get_rgba()
+        #print(f"Selected color: {color}")  
+
+    def on_back_color_select(self, color_btn, param):
+        pass
+        #color = color_btn.get_rgba()
+        #print(f"Selected color: {color}")  
+
 
 
 # Create a new application

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.96.3 -->
+<!-- Created with Cambalache 1.0 -->
 <interface>
   <!-- interface-name qrcode.ui -->
   <requires lib="gtk" version="4.18"/>
@@ -18,21 +18,6 @@
             <property name="orientation">vertical</property>
             <property name="spacing">5</property>
             <property name="valign">start</property>
-            <child>
-              <object class="GtkBox">
-                <property name="homogeneous">True</property>
-                <child>
-                  <object class="GtkLabel" id="download_lbl">
-                    <property name="label">QRCode</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="download_btn">
-                    <property name="label">Download</property>
-                  </object>
-                </child>
-              </object>
-            </child>
             <child>
               <object class="GtkBox">
                 <property name="homogeneous">True</property>
@@ -89,6 +74,51 @@
                 </child>
                 <child>
                   <object class="GtkComboBox" id="err_correction_combo"/>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="homogeneous">True</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Fill Color</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkColorDialogButton" id="fill_color_button">
+                    <property name="rgba">rgb(0,0,0)</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="homogeneous">True</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Back Color</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkColorDialogButton" id="back_color_button">
+                    <property name="rgba">rgb(255,255,255)</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="homogeneous">True</property>
+                <child>
+                  <object class="GtkLabel" id="download_lbl">
+                    <property name="label">QRCode</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="download_btn">
+                    <property name="label">Download</property>
+                  </object>
                 </child>
               </object>
             </child>
