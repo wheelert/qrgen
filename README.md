@@ -8,3 +8,7 @@ cd qrgen
 ./install.sh
 </code>
 
+
+https://github.com/user-attachments/assets/18d80f3f-d134-4321-a1ff-a5c8906f4931
+
+
