@@ -50,7 +50,7 @@ class QRCodeGen(Gtk.Application):
 
         self.back_color = self.builder.get_object("back_color_button")
         self.back_color_dlg = Gtk.ColorDialog()
-        #self.back_color.set_dialog(self.back_color_dlg)
+        self.back_color.set_dialog(self.back_color_dlg)
         self.back_color.connect("notify", self.on_back_color_select)
   
 
