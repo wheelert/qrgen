@@ -6,23 +6,23 @@
 
 # zenity
 if ! command -v zenity &> /dev/null; then
-    echo "you must install zenity (pacman -S zenity or apt install zenity)"
+    echo -e "\e[33m you must install zenity (pacman -S zenity or apt install zenity) \e[0m"
 	exit
 fi
 
 # python-qrcode
-if command -v python -c "import qrcode" &> /dev/null; then
-	echo "python module (qrcode) needed"
-	echo "install: pacman -S python-qrcode or apt install python-qrcode"
-	echo "or via pip install qrcode"
+if ! command -v python -c "import qrcode" &> /dev/null; then
+	echo -e "\e[33m python module (qrcode) needed \e[0m"
+	echo -e "\e[33m install: pacman -S python-qrcode or apt install python-qrcode\e[0m"
+	echo -e "\e[33m \tor via pip install qrcode\e[0m"
 	exit
 fi
 
 # python-pillow
-if command -v python -c "import pillow" &> /dev/null; then
-	echo "python module (pillow) needed"
-	echo "install: pacman -S python-pillow or apt install python-pillow"
-	echo "or via pip install pillow"
+if ! command -v python -c "import pillow" &> /dev/null; then
+	echo -e "\e[33m python module (pillow) needed\e[0m"
+	echo -e "\e[33m install: pacman -S python-pillow or apt install python-pillow\e[0m"
+	echo -e "\e[33m \tor via pip install pillow\e[0m"
 	exit
 fi
 
