@@ -8,6 +8,10 @@ python qrcode library
   - pip install qrcode
   - pacman -S python-qrcode
 
+python pillow
+  - pip install pillow
+  - pacman -S python-pillow
+
 [install QRGen]<br />
 clone repo 
 <code>
