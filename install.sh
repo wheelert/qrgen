@@ -1,11 +1,32 @@
 #!/bin/bash
 #
-# Check for zenity
+# Check for prereqs
 #
 
+
+# zenity
 if ! command -v zenity &> /dev/null; then
     echo "you must install zenity (pacman -S zenity or apt install zenity)"
+	exit
 fi
+
+# python-qrcode
+if command -v python -c "import qrcode" &> /dev/null; then
+	echo "python module (qrcode) needed"
+	echo "install: pacman -S python-qrcode or apt install python-qrcode"
+	echo "or via pip install qrcode"
+	exit
+fi
+
+# python-pillow
+if command -v python -c "import pillow" &> /dev/null; then
+	echo "python module (pillow) needed"
+	echo "install: pacman -S python-pillow or apt install python-pillow"
+	echo "or via pip install pillow"
+	exit
+fi
+
+
 
 if zenity --question --text="Install QRGen?"; then
 
