@@ -3,7 +3,7 @@
 [install QRGen]<br />
 clone repo 
 <code>
-git clone git@github.com:wheelert/qrgen.git
+git clone [git@github.com:wheelert/qrgen.git](https://github.com/wheelert/qrgen.git)
 cd qrgen
 ./install.sh
 </code>
