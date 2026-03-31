@@ -1,4 +1,12 @@
 <img width="717" height="386" alt="image" src="https://github.com/user-attachments/assets/50460df6-c04c-4319-8bb8-8ad3118274ed" />
+[requirements]
+
+zenity
+  - pacman -S zenity
+  - apt install zenity
+python qrcode library
+  - pip install qrcode
+  - pacman -S python-qrcode
 
 [install QRGen]<br />
 clone repo 
