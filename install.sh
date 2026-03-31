@@ -4,7 +4,7 @@
 #
 
 if ! command -v zenity &> /dev/null; then
-    echo "you must install zenity (pacman -S zenity or pat install zenity)"
+    echo "you must install zenity (pacman -S zenity or apt install zenity)"
 fi
 
 if zenity --question --text="Install QRGen?"; then
