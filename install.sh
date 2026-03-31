@@ -11,7 +11,7 @@ if ! command -v zenity &> /dev/null; then
 fi
 
 # python-qrcode
-if ! command -v python -c "import qrcode" &> /dev/null; then
+if ! python -c "import qrcode" &> /dev/null; then
 	echo -e "\e[33m python module (qrcode) needed \e[0m"
 	echo -e "\e[33m install: pacman -S python-qrcode or apt install python-qrcode\e[0m"
 	echo -e "\e[33m \tor via pip install qrcode\e[0m"
@@ -19,7 +19,7 @@ if ! command -v python -c "import qrcode" &> /dev/null; then
 fi
 
 # python-pillow
-if ! command -v python -c "import pillow" &> /dev/null; then
+if ! python -c "import pillow" &> /dev/null; then
 	echo -e "\e[33m python module (pillow) needed\e[0m"
 	echo -e "\e[33m install: pacman -S python-pillow or apt install python-pillow\e[0m"
 	echo -e "\e[33m \tor via pip install pillow\e[0m"
