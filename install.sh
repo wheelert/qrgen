@@ -19,7 +19,7 @@ if ! python -c "import qrcode" &> /dev/null; then
 fi
 
 # python-pillow
-if ! python -c "import pillow" &> /dev/null; then
+if ! python -c "import PIL" &> /dev/null; then
 	echo -e "\e[33m python module (pillow) needed\e[0m"
 	echo -e "\e[33m install: pacman -S python-pillow or apt install python-pillow\e[0m"
 	echo -e "\e[33m \tor via pip install pillow\e[0m"
